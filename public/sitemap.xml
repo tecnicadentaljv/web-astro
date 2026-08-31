@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generado por scripts/prerender.mjs. No editar a mano. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://www.tecnicadentaljv.com/</loc><priority>1.0</priority></url>
+  <url><loc>https://www.tecnicadentaljv.com/quienes-somos</loc><priority>0.7</priority></url>
+  <url><loc>https://www.tecnicadentaljv.com/que-hacemos</loc><priority>0.7</priority></url>
+  <url><loc>https://www.tecnicadentaljv.com/tecnologia</loc><priority>0.7</priority></url>
+  <url><loc>https://www.tecnicadentaljv.com/contacto</loc><priority>0.9</priority></url>
+  <url><loc>https://www.tecnicadentaljv.com/aviso-legal</loc><priority>0.7</priority></url>
+  <url><loc>https://www.tecnicadentaljv.com/privacidad</loc><priority>0.7</priority></url>
+</urlset>

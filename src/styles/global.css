@@ -1,0 +1,236 @@
+@import "tailwindcss";
+
+/* Fuentes autohospedadas. Sin <link> a Google Fonts: era render-blocking.
+   Los dos ficheros traen eje de anchura (wdth), que es lo que permite el
+   display expandido sin cargar una segunda familia. */
+@import "@fontsource-variable/archivo/wdth.css";
+@import "@fontsource-variable/instrument-sans/wdth.css";
+
+@theme {
+  --font-display: "Archivo Variable", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-sans: "Instrument Sans Variable", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  /* Superficies claras. Neutro cálido, no el gris azulado del sector. */
+  --color-fondo: #faf8f5;
+  --color-superficie: #ffffff;
+  --color-panel: #f2ede7;
+  --color-linea: #e5ded5;
+
+  /* Bloques oscuros. El navy es el ancla de marca y no se toca. */
+  --color-oscuro: #14294a;
+  --color-oscuro-hondo: #0e1d33;
+
+  /* Texto */
+  --color-tinta: #14294a;
+  --color-tinta-suave: #5c6b80;
+
+  /* ACENTO ÚNICO. Naranja de horno de cerámica.
+     Bloqueado para toda la web: no hay un segundo acento en ninguna sección.
+     Contrastes verificados (WCAG AA):
+       #be441a sobre #faf8f5 .......... 4.91  texto normal PASA
+       #ffffff sobre #be441a .......... 5.21  texto normal PASA
+       #e8834f sobre #14294a .......... 5.39  texto normal PASA
+     #e8834f es SOLO para fondo oscuro. Sobre claro no pasa contraste. */
+  --color-acento: #be441a;
+  --color-acento-claro: #e8834f;
+
+  /* UN solo radio en toda la web. Nada es pastilla, nada va muy redondeado.
+     Regla de forma bloqueada: tarjetas, botones, etiquetas e inputs, todos 4px. */
+  --radius-base: 4px;
+
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-fondo);
+    color: var(--color-tinta);
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-wrap: pretty;
+    /* Cifras de ancho fijo: sustituye al mono que había en teléfonos y datos. */
+    font-variant-numeric: tabular-nums;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-stretch: 112%;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  a {
+    color: var(--color-acento);
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: var(--color-tinta);
+  }
+
+  ::selection {
+    background: var(--color-acento);
+    color: #ffffff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-acento);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .contenedor {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+
+  /* Display expandido. El carácter industrial sale del eje wdth,
+     no de una segunda fuente. */
+  .display-ancho {
+    font-family: var(--font-display);
+    font-stretch: 118%;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+  }
+
+  /* Superficie estándar. Sin sombra: la jerarquía la marca el borde
+     y el espacio, no la elevación falsa. */
+  .superficie {
+    background-color: var(--color-superficie);
+    border: 1px solid var(--color-linea);
+    border-radius: var(--radius-base);
+  }
+
+}
+
+/* Entrada del hero. Justificación: establece jerarquía de lectura
+   (titular, luego promesa, luego acción) en la primera impresión.
+   Solo se ejecuta si el usuario no ha pedido reducir movimiento. */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes entrada {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  .entrada {
+    animation: entrada 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+}
+
+/* Reveals al entrar en viewport. Se activan con IntersectionObserver
+   añadiendo .visible; sin librería de animación y sin listener de scroll. */
+@layer utilities {
+  .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+      opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Tirón magnético de los CTA (ver src/hooks/useMagnetico.ts). El propio
+     hook decide si aplica algo; esta transición solo suaviza el trayecto de
+     ida y, sobre todo, la vuelta a su sitio al salir el cursor. */
+  .magnetico {
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+  }
+}
+
+/* Relleno de la espina (Flujo) al hacer scroll. Justificación: la línea
+   representa el avance real del caso a través del proceso, así que tiene
+   sentido que se dibuje con el propio scroll en vez de aparecer entera de
+   golpe. Animación dirigida por scroll nativa de CSS, sin JS ni listener de
+   scroll. Sin soporte del navegador, la línea sencillamente se ve completa
+   desde el principio: nunca se queda a medias. */
+.espina-relleno {
+  transform-origin: left;
+  transform: scaleX(1);
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .espina-relleno {
+      transform: scaleX(0);
+      animation: rellenar-espina linear both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 65%;
+    }
+  }
+}
+
+@keyframes rellenar-espina {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/*
+ * Cruce entre páginas (ver src/lib/viewTransition.ts y
+ * src/components/ui/Link.tsx). Sin nombrar ningún elemento con
+ * view-transition-name: el navegador fotografía toda la página antes y
+ * después. La cabecera, el pie y la barra flotante no cambian entre rutas,
+ * así que su foto es idéntica en ambos lados y no se ve ningún parpadeo;
+ * solo el contenido de <main>, que sí difiere, hace el cross-fade real.
+ *
+ * Duración y curva iguales a .reveal, para que el cruce se sienta parte del
+ * mismo sistema de movimiento y no un efecto aparte.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.4s;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
