@@ -4,6 +4,7 @@ import { site, contacto, navegacion, whatsappUrl, telefonoUrl } from '@data/site
 const legales = [
   { texto: 'Aviso legal', href: '/aviso-legal' },
   { texto: 'Privacidad', href: '/privacidad' },
+  { texto: 'Cookies', href: '/cookies' },
 ];
 
 export default function Footer() {

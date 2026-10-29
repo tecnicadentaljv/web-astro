@@ -52,7 +52,7 @@ src/
 
 La home son **diez secciones con diez familias de layout distintas**. Ninguna se repite, y el sitio no usa ni un solo eyebrow.
 
-Rutas: `/`, `/quienes-somos`, `/que-hacemos`, `/tecnologia`, `/contacto`, `/blog` (vacío, `noindex`), `/aviso-legal`, `/privacidad` y 404.
+Rutas: `/`, `/quienes-somos`, `/que-hacemos`, `/tecnologia`, `/contacto`, `/blog` (vacío, `noindex`), `/aviso-legal`, `/privacidad`, `/cookies` y 404.
 
 ## Sistema de diseño
 
@@ -79,13 +79,13 @@ npm run build     # typecheck + cliente + SSR + prerender + sitemap
 npm run og        # regenera public/og-default.jpg
 ```
 
-El build **prerenderiza las 8 rutas**. Sin eso, los crawlers de WhatsApp, LinkedIn y Facebook solo veían la tarjeta de la home, porque no ejecutan JavaScript. Cada ruta sale con su title, description, canonical, `og:*` y robots correctos, y con los datos estructurados que le tocan: `FAQPage` solo en `/` y `/contacto`, `BreadcrumbList` solo en las rutas interiores.
+El build **prerenderiza las 9 rutas**. Sin eso, los crawlers de WhatsApp, LinkedIn y Facebook solo veían la tarjeta de la home, porque no ejecutan JavaScript. Cada ruta sale con su title, description, canonical, `og:*` y robots correctos, y con los datos estructurados que le tocan: `FAQPage` solo en `/` y `/contacto`, `BreadcrumbList` solo en las rutas interiores.
 
 El sitemap se regenera desde `src/data/seo.ts` en cada build. No editarlo a mano.
 
 ## Analítica
 
-Vercel Analytics, sin cookies, por lo que **no hay banner de consentimiento**. La conversión que importa no son las visitas: son los clics a WhatsApp y teléfono. Se registran con un único listener delegado (`src/hooks/useContactoTracking.ts`), así que un CTA nuevo se mide solo, sin tener que acordarse de instrumentarlo.
+Vercel Analytics, sin cookies según el proveedor. La política de `/cookies` informa sobre la medición; cualquier herramienta nueva que necesite consentimiento deberá bloquearse hasta recogerlo. La conversión que importa no son las visitas: son los clics a WhatsApp y teléfono. Se registran con un único listener delegado (`src/hooks/useContactoTracking.ts`), así que un CTA nuevo se mide solo, sin tener que acordarse de instrumentarlo.
 
 Cambiar a Plausible o Umami no requiere tocar componentes: `src/lib/analytics.ts` los detecta si se carga su script.
 
@@ -95,7 +95,7 @@ Bloqueantes:
 
 1. **Confirmar el alcance de la garantía**: el campo `limite` en `src/data/garantia.ts`. Publicar "2 años al 100%" es **la única frase de toda la web que genera responsabilidad real**, así que tiene que decir exactamente lo que el laboratorio está dispuesto a sostener. La redacción actual es una asunción razonable, no una confirmación.
 2. **Las 6 fotografías.** Ver `FOTOGRAFIA.md`. Dejar los archivos en `public/fotos/` y rellenar `src` en `src/data/photos.ts`. Las medidas ya están reservadas: sustituirlas no mueve el layout.
-3. **Validar los textos legales** con un asesor. Están redactados y con los datos fiscales reales, pero no son asesoramiento jurídico.
+3. **Validar los textos legales** con Sigma Consultoría Legal antes de publicar cambios: atribución del dato profesional del colegiado, tratamiento internacional de Vercel y WhatsApp, base jurídica y plazos de conservación. Los textos adaptan los documentos recibidos a esta web, pero requieren su conformidad.
 4. **Comprobar `public/og-default.jpg`** a ojo. Se genera con `npm run og`, y el renderizador de SVG usa fuentes del sistema, no Archivo.
 5. **Redirección 301 del `.es` al `.com`** en el hosting. El canonical ya apunta siempre al `.com`.
 

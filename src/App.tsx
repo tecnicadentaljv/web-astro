@@ -46,6 +46,7 @@ export default function App() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/aviso-legal" element={<Legal tipo="aviso" />} />
           <Route path="/privacidad" element={<Legal tipo="privacidad" />} />
+          <Route path="/cookies" element={<Legal tipo="cookies" />} />
           <Route path="*" element={<NoEncontrada />} />
         </Routes>
       </Layout>

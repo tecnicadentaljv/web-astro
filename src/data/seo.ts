@@ -57,6 +57,10 @@ export const seoRutas: Record<string, SeoRuta> = {
     descripcion:
       'Cómo trata Técnica Dental JV los datos personales de las clínicas con las que trabaja.',
   },
+  '/cookies': {
+    titulo: 'Política de cookies',
+    descripcion: 'Información sobre cookies y medición de visitas en Técnica Dental JV.',
+  },
 };
 
 /** Rutas que se prerenderizan y que van al sitemap. */

@@ -1,20 +1,20 @@
 /**
- * Datos para aviso legal y política de privacidad.
+ * Datos para el aviso legal y las políticas de privacidad y cookies.
  *
- * Obligatorio en España: aviso legal (LSSI-CE 34/2002) y política de
- * privacidad (RGPD + LOPDGDD). No hace falta política de cookies porque la
- * analítica elegida no usa cookies.
- *
- * Los textos de las páginas son una base redactada, no asesoramiento
- * jurídico: que los valide vuestro asesor antes de publicar.
+ * Los datos identificativos proceden de la documentación legal facilitada.
+ * El texto de las páginas adapta esa documentación al funcionamiento real
+ * de esta web; debe mantenerse validado por el asesor legal de la empresa.
  */
 export const legal = {
-  razonSocial: 'Tecnica Dental J.V., S.L.',
-  // Desde 2008 las personas jurídicas tienen NIF, no CIF. La B es de S.L.
+  razonSocial: 'Técnica dental J.V. S.L.',
   nif: 'B25923574',
+  irus: '1000465661885',
   domicilioFiscal: 'C. del Palleter, 23, BAJO, 46008 València',
   emailContacto: 'tecnicadentaljv@gmail.com',
-  actualizado: 'agosto de 2026',
+  telefono: '699 979 387',
+  titulacion: 'Técnico Superior en Prótesis Dental',
+  numeroColegiado: '1593',
+  actualizado: 'octubre de 2026',
 };
 
 export const datosPendientes = Object.values(legal).some((v) => v.startsWith('[TODO'));
