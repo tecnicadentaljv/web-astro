@@ -7,7 +7,7 @@ const legales = [
   { texto: 'Cookies', href: '/cookies' },
 ];
 
-export default function Footer() {
+export default function Footer({ onAbrirPreferencias }: { onAbrirPreferencias: () => void }) {
   const anio = new Date().getFullYear();
 
   return (
@@ -85,12 +85,19 @@ export default function Footer() {
           <span>
             © {anio} {site.nombre}
           </span>
-          <span className="flex gap-6">
+          <span className="flex flex-wrap gap-x-6 gap-y-2">
             {legales.map((item) => (
               <Link key={item.href} to={item.href} className="text-white/45 no-underline hover:text-white">
                 {item.texto}
               </Link>
             ))}
+            <button
+              type="button"
+              onClick={onAbrirPreferencias}
+              className="cursor-pointer border-0 bg-transparent p-0 text-left font-sans text-[14px] text-white/45 hover:text-white"
+            >
+              Configurar cookies
+            </button>
           </span>
         </div>
       </div>

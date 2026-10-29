@@ -1,17 +1,7 @@
 import { track as vercelTrack } from '@vercel/analytics';
+import { analiticaPermitida } from './consentimiento';
 
-/**
- * Analítica sin cookies y agnóstica de proveedor.
- *
- * Por qué no Google Analytics: GA4 en España obliga a banner de
- * consentimiento con bloqueo previo. Lo primero que vería un dentista al
- * entrar sería un modal, en una web cuyo argumento es la limpieza y la
- * franqueza. Y con el consentimiento denegado te quedas sin dato igualmente.
- *
- * Vercel Analytics es el proveedor por defecto. Si algún día se cambia a
- * Plausible o Umami, basta con cargar su script: las ramas de abajo lo
- * detectan solas y no hay que tocar ningún componente.
- */
+/** Envía eventos únicamente cuando se ha aceptado la analítica opcional. */
 
 type Datos = Record<string, string | number | boolean>;
 
@@ -21,7 +11,7 @@ interface OtrosProveedores {
 }
 
 export function track(nombre: string, datos?: Datos): void {
-  if (typeof window === 'undefined') return;
+  if (typeof window === 'undefined' || !analiticaPermitida()) return;
   const w = window as unknown as OtrosProveedores;
 
   try {

@@ -56,23 +56,24 @@ function bloques(tipo: Props['tipo']): Bloque[] {
   if (tipo === 'cookies') {
     return [
       {
-        titulo: 'Configuración actual',
+        titulo: 'Tecnologías utilizadas',
         parrafos: [
-          'Esta web no instala cookies propias de analítica, publicidad o personalización, ni carga vídeos, mapas, formularios o botones sociales de terceros al abrir una página.',
+          'Esta web guarda en el almacenamiento local de tu navegador tu elección sobre la analítica. Es necesario para recordarla y no activa la medición de visitas por sí mismo. No instalamos cookies de publicidad o personalización.',
           'Los enlaces a WhatsApp y Google Maps abren esos servicios únicamente cuando el usuario pulsa en ellos. Desde ese momento se aplican las políticas del proveedor correspondiente.',
         ],
       },
       {
         titulo: 'Medición de visitas',
         parrafos: [
-          'Utilizamos Vercel Web Analytics para obtener estadísticas agregadas de visitas y de los clics en los enlaces de contacto. El servicio no utiliza cookies de terceros: identifica la visita mediante un hash de la petición y descarta ese identificador después de 24 horas.',
+          'Solo si aceptas la analítica cargamos Vercel Web Analytics para obtener estadísticas agregadas de visitas y clics en los enlaces de contacto. El servicio no utiliza cookies: identifica la visita mediante un hash de la petición y descarta ese identificador después de 24 horas.',
           'No usamos estos datos para publicidad ni para crear perfiles individuales. La información técnica puede incluir la página visitada, fecha y hora, dispositivo, navegador, sistema operativo, país o ciudad aproximados y sitio de procedencia.',
+          'Puedes aceptar o rechazar la analítica desde el aviso inicial y cambiar tu decisión en cualquier momento mediante «Configurar cookies» en el pie de página. Al retirarla, dejamos de cargar la analítica en las visitas siguientes y recargamos la página para detener el script activo.',
         ],
       },
       {
         titulo: 'Cambios y contacto',
         parrafos: [
-          'Si se incorporan tecnologías que requieran consentimiento, esta política se actualizará y se solicitará la elección del usuario antes de activarlas cuando sea necesario.',
+          'Si incorporamos otras tecnologías opcionales, actualizaremos esta política y solicitaremos una nueva elección antes de activarlas.',
           `Para cualquier duda sobre cookies o medición puedes escribir a ${legal.emailContacto}. Última revisión: ${legal.actualizado}.`,
         ],
       },
@@ -90,13 +91,13 @@ function bloques(tipo: Props['tipo']): Bloque[] {
       titulo: 'Datos tratados y finalidades',
       parrafos: [
         'La web no tiene formularios de contacto, área de clientes ni subida de casos clínicos. Cuando una clínica llama o escribe por WhatsApp, podemos tratar los datos que facilite, como nombre, clínica, teléfono y contenido de la consulta, para responder, gestionar la relación profesional y prestar el servicio solicitado.',
-        'El proveedor de alojamiento y analítica recibe determinados datos técnicos necesarios para servir, proteger y medir el sitio. No se toman decisiones automatizadas ni se elaboran perfiles individuales.',
+        'Vercel recibe determinados datos técnicos necesarios para servir y proteger el sitio. Solo si aceptas la analítica se miden las visitas y los clics en enlaces de contacto. No se toman decisiones automatizadas ni se elaboran perfiles individuales.',
       ],
     },
     {
       titulo: 'Base jurídica',
       parrafos: [
-        'Las consultas y la preparación de servicios se tratan sobre la base de medidas precontractuales o de la ejecución de la relación contractual, según corresponda. El funcionamiento y la seguridad del sitio y la relación profesional con las clínicas se basan en el interés legítimo. Las comunicaciones comerciales que requieran consentimiento solo se enviarán cuando exista una autorización válida.',
+        'Las consultas y la preparación de servicios se tratan sobre la base de medidas precontractuales o de la ejecución de la relación contractual, según corresponda. El funcionamiento y la seguridad del sitio y la relación profesional con las clínicas se basan en el interés legítimo. La analítica opcional se activa con tu consentimiento, que puedes retirar desde «Configurar cookies» en el pie de página. Las comunicaciones comerciales que requieran consentimiento solo se enviarán cuando exista una autorización válida.',
       ],
     },
     {
